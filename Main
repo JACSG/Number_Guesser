@@ -1,0 +1,69 @@
+from random import *
+
+end_of_game = False
+while not end_of_game:
+    lives = 0
+    
+    print("Choose your difficulty (easy, medium, hard, extreme, or\nimpossible): ")
+    
+    while True:
+        difficulty = input().lower()
+        if difficulty == "easy":
+            correct_number = randint(0,9)
+            print("1 digit, 5 guesses.")
+            lives = 5
+            break
+        elif difficulty == "medium":
+            correct_number = randint(0,99)
+            print("1-2 digits, 10 Guesses.")
+            lives = 10
+            break
+        elif difficulty == "hard":
+            correct_number = randint(0,999)
+            print("1-3 digits, 15 Guesses.")
+            lives = 15
+            break
+        elif difficulty == "extreme":
+            correct_number = randint(0,9999)
+            print("1-4 digits, 20 Guesses.")
+            lives = 20
+            break
+        elif difficulty == "impossible":
+            correct_number = randint(0,99999)
+            print("1-5 digits, 25 Guesses.")
+            lives = 25
+            break
+        else:
+            print("Sorry, thats not a valid difficulty, please select from below ('easy', 'medium', 'hard', 'extreme', or \n'impossible').")
+        
+    
+    end_of_round = False
+    guesses = 0
+    correct = 0
+    dead = 0
+    while not end_of_round:
+        guess = int(input("Guess a number: "))
+        if guess < correct_number:
+            guesses += 1
+            print(f"Nope, its higher than {guess}")
+            lives -= 1
+        elif guess > correct_number:
+            guesses += 1
+            print(f"Not quite, its lower than {guess}")
+            lives -= 1
+        else:
+            guesses += 1
+            print(f"You got it! And it only took you {guesses} guesses!")
+            correct = 1
+            end_of_round = True
+        if lives == 0:
+            print("You ran out of lives, Game Over.        ")
+            dead = 1
+            end_of_round = True
+    
+        if correct == 1 or dead ==1:
+            again = input("Wanna play again? y/n: ")
+            if again.lower() == "n":
+                end_of_game = True
+
+print("Done.")
